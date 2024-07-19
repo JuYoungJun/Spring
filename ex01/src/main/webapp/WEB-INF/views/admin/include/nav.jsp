@@ -10,6 +10,8 @@
 		<li>${ member.userName }님 환영합니다.</li>
 	<c:if test="${ member.verify == 9 }">
 		<li><a href="/admin/index">관리자 화면</a></li>
+		<li><a href="/board/listPageSearch?num=1">게시판</a></li>
+		<li><a href="/board/write">글작성</a></li>
 	</c:if>
 		<li><a href="/member/signout">로그아웃</a></li>
 	</c:if>

@@ -63,7 +63,6 @@
 		독립적으로 쓸 수 있음) * <init-param> - 지역변수 지정, 특정 서블릿 사용 가능( = <servlet> 안에서만 쓸 
 		수 있음) -->
 
-
 	<welcome-file-list>
 		<welcome-file>./WEB-INF/views/index.jsp</welcome-file>
 	</welcome-file-list>
