@@ -4,6 +4,8 @@ import javax.servlet.http.*;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import com.mat.mvc.vo.MemberVO;
+
 public class AdminInterceptor implements HandlerInterceptor {
 
 	@Override

@@ -1,4 +1,4 @@
-package com.mat.mvc.dao;
+package com.mat.mvc.vo;
 
 import java.util.Date;
 

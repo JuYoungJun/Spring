@@ -18,6 +18,7 @@
 
 	<!-- model에 대한 정보 -->
 	<!-- 패키지명을 넣어준다. -->
+	<context:component-scan base-package="com.mat.mvc.vo"/> 
 	<context:component-scan base-package="com.mat.mvc.dao"/> 
 	<context:component-scan base-package="com.mat.mvc.service"/> 
 	<context:component-scan base-package="com.mat.mvc.service.impl"/> 

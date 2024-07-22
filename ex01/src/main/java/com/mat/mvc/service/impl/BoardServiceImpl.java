@@ -7,8 +7,8 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.mat.mvc.dao.BoardDAO;
-import com.mat.mvc.dao.BoardVO;
 import com.mat.mvc.service.BoardService;
+import com.mat.mvc.vo.BoardVO;
 
 @Service
 public class BoardServiceImpl implements BoardService {

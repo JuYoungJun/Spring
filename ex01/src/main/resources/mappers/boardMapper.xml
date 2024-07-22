@@ -5,19 +5,19 @@
 <mapper namespace="com.board.mappers.board">
 
 	<!-- 게시물 목록 -->
-	<select id="list" resultType="com.mat.mvc.dao.BoardVO">
+	<select id="list" resultType="com.mat.mvc.vo.BoardVO">
 		select bno, title, content, writer,
 		regDate, viewCnt from tbl_board
 	</select>
 
 	<!-- 게시물 작성 -->
-	<insert id="write" parameterType="com.mat.mvc.dao.BoardVO">
+	<insert id="write" parameterType="com.mat.mvc.vo.BoardVO">
 		insert into tbl_board (title,
 		content, writer) values (#{title}, #{content}, #{writer})
 	</insert>
 
 	<!-- 게시물 수정 -->
-	<update id="modify" parameterType="com.mat.mvc.dao.BoardVO">
+	<update id="modify" parameterType="com.mat.mvc.vo.BoardVO">
 		update tbl_board set title =
 		#{title}, content = #{content}, writer = #{writer} where bno = #{bno}
 	</update>
@@ -35,7 +35,7 @@
 
 	<!-- 게시물 상세 보기 -->
 	<select id="view" parameterType="int"
-		resultType="com.mat.mvc.dao.BoardVO">
+		resultType="com.mat.mvc.vo.BoardVO">
 		select bno, title, content, writer, regDate, viewCnt from
 		tbl_board where bno = #{bno}
 	</select>
@@ -47,14 +47,14 @@
 
 	<!-- 게시물 목록 + 페이징 -->
 	<select id="listPage" parameterType="hashMap"
-		resultType="com.mat.mvc.dao.BoardVO">
+		resultType="com.mat.mvc.vo.BoardVO">
 		select bno, title, content, writer, regDate, viewCnt from tbl_board order by
 		bno desc limit #{displayPost}, #{postNum}
 	</select>
 
 	<!-- 게시물 목록 + 페이징 + 검색 -->
 	<select id="listPageSearch" parameterType="hashMap"
-		resultType="com.mat.mvc.dao.BoardVO">
+		resultType="com.mat.mvc.vo.BoardVO">
 		select bno, title, writer, regDate, viewCnt from tbl_board
 
 		<if test='searchType.equals("title")'>

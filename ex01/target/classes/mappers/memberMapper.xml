@@ -9,7 +9,7 @@
 	</insert>
    
    <!-- 로그인 -->
-   <select id="signin" resultType="com.mat.mvc.dao.MemberVO">
+   <select id="signin" resultType="com.mat.mvc.vo.MemberVO">
    		select userId, userPass, userName, userPhone, userAddr1, userAddr2, userAddr3, regiDate, verify from tbl_member where userId = #{userId}
    </select>
 </mapper>

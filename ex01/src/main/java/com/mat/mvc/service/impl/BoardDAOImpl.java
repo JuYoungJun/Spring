@@ -9,7 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.mat.mvc.dao.BoardDAO;
-import com.mat.mvc.dao.BoardVO;
+import com.mat.mvc.vo.BoardVO;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO {

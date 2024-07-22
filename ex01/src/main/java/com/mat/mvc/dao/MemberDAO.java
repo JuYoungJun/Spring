@@ -1,5 +1,7 @@
 package com.mat.mvc.dao;
 
+import com.mat.mvc.vo.MemberVO;
+
 public interface MemberDAO {
 
 	// 회원가입

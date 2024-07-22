@@ -2,6 +2,8 @@ package com.mat.mvc.dao;
 
 import java.util.*;
 
+import com.mat.mvc.vo.BoardVO;
+
 public interface BoardDAO {
 	
 	// 게시물 읽기

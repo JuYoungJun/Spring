@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.mat.mvc.dao.MemberVO;
 import com.mat.mvc.service.MemberService;
+import com.mat.mvc.vo.MemberVO;
 
 @Controller
 @RequestMapping("/member/*")

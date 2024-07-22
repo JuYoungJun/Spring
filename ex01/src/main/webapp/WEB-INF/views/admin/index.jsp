@@ -22,6 +22,15 @@
 		</nav>
 		
 		<section id = "container">
+			<aside>
+				<%@ include file = "include/aside.jsp" %>
+			</aside>
+			<div id = "container_box">
+				<p>상품등록</p>
+			</div>
+		</section>
+		
+		<section id = "container">
 			<div id = "container_box">
 				<h1>여기가 관리자 페이지다.</h1>
 			</div>

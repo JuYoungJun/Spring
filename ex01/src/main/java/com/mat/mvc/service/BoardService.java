@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.mat.mvc.dao.BoardVO;
+import com.mat.mvc.vo.BoardVO;
 
 @Service
 public interface BoardService {

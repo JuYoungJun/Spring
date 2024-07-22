@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.mat.mvc.dao.BoardVO;
 import com.mat.mvc.dao.Page;
 import com.mat.mvc.service.BoardService;
+import com.mat.mvc.vo.BoardVO;
 
 @Controller
 @RequestMapping("/board/*")

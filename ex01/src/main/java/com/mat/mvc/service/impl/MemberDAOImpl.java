@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.mat.mvc.dao.*;
+import com.mat.mvc.vo.MemberVO;
 import com.mat.mvc.dao.*;
 
 @Repository

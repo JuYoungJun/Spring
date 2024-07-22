@@ -1,6 +1,6 @@
 package com.mat.mvc.service;
 
-import com.mat.mvc.dao.MemberVO;
+import com.mat.mvc.vo.MemberVO;
 
 public interface MemberService {
 

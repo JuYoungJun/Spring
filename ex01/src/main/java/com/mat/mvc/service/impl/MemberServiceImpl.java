@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.mat.mvc.dao.*;
 import com.mat.mvc.service.*;
+import com.mat.mvc.vo.MemberVO;
 
 @Service
 public class MemberServiceImpl implements MemberService {
