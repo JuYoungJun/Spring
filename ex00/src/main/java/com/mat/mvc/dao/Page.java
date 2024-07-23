@@ -1,6 +1,5 @@
 package com.mat.mvc.dao;
 
-import java.util.List;
 
 public class Page {
 
