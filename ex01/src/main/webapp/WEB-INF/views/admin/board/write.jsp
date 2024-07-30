@@ -7,71 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>게시물 작성</title>
-<style>
-body {
-	font-family: Arial, sans-serif;
-	margin: 20px;
-	padding: 0;
-	background-color: #f4f4f9;
-}
-
-form {
-	margin-bottom: 20px;
-}
-
-label {
-	display: inline-block;
-	width: 100px;
-	font-weight: bold;
-}
-
-input[type="text"], textarea {
-	width: 60%;
-	padding: 8px;
-	margin-bottom: 10px;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-}
-
-textarea {
-	resize: vertical;
-}
-
-button {
-	background-color: #4CAF50;
-	color: white;
-	padding: 10px 15px;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
-}
-
-button:hover {
-	background-color: #45a049;
-}
-
-div {
-	margin-top: 20px;
-}
-
-a {
-	color: #3498db;
-	text-decoration: none;
-	margin-right: 10px;
-}
-
-a:hover {
-	text-decoration: underline;
-}
-
-#nav {
-	margin-top: 20px;
-}
-
-textarea {
-	resize: none;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="../css/admin_board_write.css">
 </head>
 <body>
 	<div id="nav">

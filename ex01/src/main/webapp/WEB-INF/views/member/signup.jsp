@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원가입</title>
+<link rel="stylesheet" type="text/css" href="../css/main_member_signup.css">
 </head>
 <body>
 	<section id = "content">

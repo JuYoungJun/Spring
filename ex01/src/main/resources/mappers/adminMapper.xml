@@ -11,12 +11,15 @@
 	
 	<!-- 상품 등록 -->
 	<insert id="register">
-		insert into tbl_goods (gdsName, cateCode, gdsPrice, gdsStock, gdsDes) values (#{gdsName}, #{cateCode}, #{gdsPrice}, #{gdsStock}, #{gdsDes})
+		insert into tbl_goods (gdsName, cateCode, gdsPrice, gdsStock, gdsDes, gdsImg, gdsThumbImg) values (#{gdsName}, #{cateCode}, #{gdsPrice}, #{gdsStock}, #{gdsDes}, #{gdsImg}, #{gdsThumbImg})
 	</insert>
 	
 	<!-- 상품 목록 -->
-	<select id="goodslist" resultType="com.mat.mvc.vo.GoodsVO">
+<!-- 	<select id="goodslist" resultType="com.mat.mvc.vo.GoodsVO">
 		select * from tbl_goods order by gdsNum desc
+	</select> -->
+	<select id="goodslist" resultType="com.mat.mvc.vo.GoodsViewVO">
+		select g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate, g.gdsImg, g.gdsThumbImg from tbl_goods g inner join goods_category c on g.cateCode = c.cateCode
 	</select>
 	
 	<!-- 상품 조회 -->
@@ -26,23 +29,12 @@
 	
 	<!-- 상품 조회 + 카테고리 조인-->
 	<select id="goodsView" resultType="com.mat.mvc.vo.GoodsViewVO">
-   		select
-       		g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate
-           		from tbl_goods g
-               		inner join goods_category c
-                   		on g.cateCode = c.cateCode          
-              		where g.gdsNum = #{gdsNum}
+   		select g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate, g.gdsImg, g.gdsThumbImg from tbl_goods g inner join goods_category c on g.cateCode = c.cateCode where g.gdsNum = #{gdsNum}
 	</select>
 	
 	<!-- 상품 수정 -->
 	<update id="updateGoods">
-		update tbl_goods set
-			gdsName = #{gdsName},
-        	cateCode = #{cateCode},
-        	gdsPrice = #{gdsPrice},
-        	gdsStock = #{gdsStock},
-        	gdsDes = #{gdsDes}
-        where gdsNum = #{gdsNum}
+		update tbl_goods set gdsName = #{gdsName}, cateCode = #{cateCode}, gdsPrice = #{gdsPrice}, gdsStock = #{gdsStock}, gdsDes = #{gdsDes}, gdsImg = #{gdsImg}, gdsThumbImg = #{gdsThumbImg} where gdsNum = #{gdsNum}
 	</update>
 	
 	<!-- 상품 삭제 -->

@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>
+<link rel="stylesheet" type="text/css" href="../css/main_member_signin.css">
 </head>
 <body>
 	<section id="content">

@@ -29,6 +29,10 @@
 	<!-- 인터셉터 부분 -->
 	<bean id="AdminInterceptor"
 		class="com.mat.mvc.dao.AdminInterceptor"></bean>
+		
+	<!-- css js 폴더 매핑 -->
+	<mvc:resources mapping="/css/**" location="/css/"/>
+    <mvc:resources mapping="/js/**" location="/js/"/>
 
 	<mvc:interceptors>
 		<mvc:interceptor>

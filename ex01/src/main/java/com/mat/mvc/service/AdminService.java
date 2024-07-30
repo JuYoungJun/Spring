@@ -13,7 +13,7 @@ public interface AdminService {
 	public void register(GoodsVO vo) throws Exception;
 	
 	// 상품 목록 가져오기
-	public List<GoodsVO> goodslist() throws Exception;
+	public List<GoodsViewVO> goodslist() throws Exception;
 
 	// 상세보기
 	public GoodsViewVO goodsView(int gdsNum) throws Exception;
