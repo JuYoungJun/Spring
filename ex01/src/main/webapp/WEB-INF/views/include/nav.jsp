@@ -15,7 +15,7 @@
             <li><a href="/board/listPageSearch?num=1">게시판</a></li>
             <li><a href="/board/write">글작성</a></li>
             <li><a href="/shop/cartList">장바구니</a></li>
-            <li><a href="/shop/orderList">장바구니</a></li>
+            <li><a href="/shop/orderList">주문목록</a></li>
             <li><a href="/member/signout">로그아웃</a></li>
         </c:otherwise>
     </c:choose>

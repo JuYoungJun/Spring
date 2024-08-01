@@ -1,104 +1,83 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbb.mappers.shopMapper">
-
-
 	<!-- 카테고리별 상품 리스트 : 1차 분류 -->
-	<select id="list_1" resultType="com.mat.mvc.vo.GoodsViewVO">
-		select g.gdsNum, g.gdsName,
-		g.cateCode, c.cateCodeRef, c.cateName, gdsPrice,
-		gdsStock, gdsDes,
-		gdsDate, g.gdsImg, g.gdsThumbImg from tbl_goods g
-		inner join
-		goods_category c on g.cateCode = c.cateCode where g.cateCode
-		=
+	<select id="list_1" resultType="com.mat.mvc.vo.GoodsViewVO"> select g.gdsNum, g.gdsName,
+		g.cateCode, c.cateCodeRef, c.cateName, gdsPrice, gdsStock, gdsDes,
+		gdsDate, g.gdsImg, g.gdsThumbImg from tbl_goods g inner join
+		goods_category c on g.cateCode = c.cateCode where g.cateCode =
 		#{cateCode} or c.cateCodeRef = #{cateCodeRef}
 	</select>
-	<!-- 카테고리별 상품 리스트 : 2차 분류 -->
+
+	<!--  카테고리별 상품 리스트 : 2차 분류 -->
 	<select id="list_2" resultType="com.mat.mvc.vo.GoodsViewVO"> select g.gdsNum, g.gdsName,
 		g.cateCode, c.cateCodeRef, c.cateName, gdsPrice, gdsStock, gdsDes,
 		gdsDate, g.gdsImg, g.gdsThumbImg from tbl_goods g inner join
 		goods_category c on g.cateCode = c.cateCode where g.cateCode =
 		#{cateCode}
 	</select>
-
-	<insert id="addCart">
-		insert into tbl_cart (userId, gdsNum, cartStock)
-		values (#{userId}, #{gdsNum}, #{cartStock})
+	<!-- 카트 담기 -->
+	<insert id="addCart"> insert into tbl_cart (cartNum, userId, gdsNum,
+		cartStock) values (null, #{userId}, #{gdsNum}, #{cartStock})
 	</insert>
-
 	<!-- 카트 리스트 -->
-	<select id="cartList" resultType="com.mat.mvc.vo.CartListVO">
-		select
-		row_number() over(order
-		by c.cartNum desc) as num,
-		c.cartNum, c.userId, c.gdsNum, c.cartStock,
-		c.addDate,
-		g.gdsName, g.gdsPrice, g.gdsThumbImg
-		from tbl_cart c
-		inner
-		join tbl_goods g
-		on c.gdsNum = g.gdsNum
-		where c.userId = #{userId}
+	<select id="cartList" resultType="com.mat.mvc.vo.CartListVO"> select row_number() over(order
+		by c.cartNum desc) as num, c.cartNum, c.userId, c.gdsNum, c.cartStock,
+		c.addDate, g.gdsName, g.gdsPrice, g.gdsThumbImg from tbl_cart c inner
+		join tbl_goods g on c.gdsNum = g.gdsNum where c.userId = #{userId}
 	</select>
-
 	<!-- 카트 삭제 -->
-	<delete id="deleteCart">
-		delete from tbl_cart where cartNum = #{cartNum} and
+	<delete id="deleteCart"> delete from tbl_cart where cartNum = #{cartNum} and
 		userId = #{userId}
 	</delete>
-
 	<!-- 주문 정보 -->
-	<insert id="orderInfo">
-		insert into tbl_order(orderId, userId, orderRec,
-		userAddr1, userAddr2,
-		userAddr3, orderPhone, amount)
-		values(#{orderId},
-		#{userId}, #{orderRec}, #{userAddr1}, #{userAddr2}, #{userAddr3},
-		#{orderPhone}, #{amount})
+	<insert id="orderInfo"> insert into tbl_order(orderId, userId, orderRec,
+		userAddr1, userAddr2, userAddr3, orderPhone, amount)
+		values(#{orderId}, #{userId}, #{orderRec}, #{userAddr1}, #{userAddr2},
+		#{userAddr3}, #{orderPhone}, #{amount})
 	</insert>
-
 	<!-- 주문 상세 정보 -->
-	<insert id="orderInfo_Details">
-		insert into tbl_order_details(orderId, gdsNum,
-		cartStock)
-		select #{orderId}, gdsNum, cartStock
-		from tbl_cart
+	<insert id="orderInfo_Details"> insert into tbl_order_details(orderId, gdsNum,
+		cartStock) select #{orderId}, gdsNum, cartStock from tbl_cart
 	</insert>
-
 	<!-- 카트 비우기 -->
-	<delete id="cartAllDelete">
-		delete from tbl_cart where userId = #{userId}
+	<delete id="cartAllDelete"> delete from tbl_cart where userId = #{userId}
 	</delete>
-
 	<!-- 특정 유저의 주문 목록 -->
-	<select id="orderList" resultType="com.mat.mvc.vo.OrderVO">
-		select orderId, userId,
+	<select id="orderList" resultType="com.mat.mvc.vo.OrderVO"> select orderId, userId,
 		orderRec, userAddr1, userAddr2, userAddr3, orderPhone, amount,
-		orderDate from tbl_order where userId = #{userId}
+		orderDate, delivery from tbl_order where userId = #{userId}
 	</select>
-
 	<!-- 특정 주문 목록 -->
-	<select id="orderView" resultType="com.mat.mvc.vo.OrderListVO">
-		select
-		o.orderId, o.userId,
-		o.orderRec, o.userAddr1, o.userAddr2, o.userAddr3,
-		o.orderPhone,
-		o.amount, o.orderDate,
-		d.orderDetailsNum, d.gdsNum, d.cartStock,
-		g.gdsName, g.gdsThumbImg, g.gdsPrice
-		from tbl_order o
-		inner join
-		tbl_order_details d
-		on o.orderId = d.orderId
-		inner join tbl_goods g
-		on
-		d.gdsNum = g.gdsNum
-		where o.userId = #{userId}
-		and o.orderId =
-		#{orderId}
+	<select id="orderView" resultType="com.mat.mvc.vo.OrderListVO"> select o.orderId, o.userId,
+		o.orderRec, o.userAddr1, o.userAddr2, o.userAddr3, o.orderPhone,
+		o.amount, o.orderDate, o.delivery, d.orderDetailsNum, d.gdsNum,
+		d.cartStock, g.gdsName, g.gdsThumbImg, g.gdsPrice from tbl_order o
+		inner join tbl_order_details d on o.orderId = d.orderId inner join
+		tbl_goods g on d.gdsNum = g.gdsNum where o.userId = #{userId} and
+		o.orderId = #{orderId}
 	</select>
-
+	<!-- 상품 소감(댓글) 작성 -->
+	<insert id="registReply"> insert into tbl_reply (gdsNum, userId, repCon)
+		values (#{gdsNum}, #{userId}, #{repCon})
+	</insert>
+	<!-- 상품 소감(댓글) 리스트 -->
+	<select id="replyList" resultType="com.mat.mvc.vo.ReplyListVO"> select r.gdsNum, r.userId,
+		r.repNum, r.repCon, r.repDate, m.userName from tbl_reply r inner join
+		tbl_member m on r.userId = m.userId where gdsNum = #{gdsNum}
+	</select>
+	<!-- 상품 소감(댓글) 삭제 -->
+	<delete id="deleteReply"> delete from tbl_reply where repNum = #{repNum} and
+		userId = #{userId}
+	</delete>
+	<!-- 아이디 체크 -->
+	<select id="replyUserIdCheck" resultType="String"> select userId from
+		tbl_reply where repNum = #{repNum}
+	</select>
+	<!-- 상품 소감(댓글) 수정 -->
+	<update id="modifyReply"> update tbl_reply set repCon = #{repCon} where repNum
+		= #{repNum} and userId = #{userId}
+	</update>
 </mapper>

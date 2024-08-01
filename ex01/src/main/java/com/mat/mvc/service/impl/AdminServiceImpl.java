@@ -45,4 +45,19 @@ public class AdminServiceImpl implements AdminService {
 	public void deleteGoods(int gdsNum) throws Exception {
 		dao.deleteGoods(gdsNum);
 	}
+
+	@Override
+	public List<OrderVO> orderList() throws Exception {
+		return dao.orderList();
+	}
+
+	@Override
+	public List<OrderListVO> orderView(OrderVO order) throws Exception {
+		return dao.orderView(order);
+	}
+
+	@Override
+	public void delivery(OrderVO order) throws Exception {
+		dao.delivery(order);
+	}
 }

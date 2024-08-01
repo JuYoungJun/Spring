@@ -10,22 +10,22 @@
 <link rel="stylesheet" type="text/css" href="/css/admin_goods_list.css">
 </head>
 <body>
-	<div id = "root">
-		<header id = "header">
-			<div id = "header_box">
+	<div id="root">
+		<header id="header">
+			<div id="header_box">
 				<%@ include file="../include/header.jsp" %>
 			</div>
 		</header>
 		
-		<nav id = "nav">
-			<div id = "nav_box">
+		<nav id="nav">
+			<div id="nav_box">
 				<%@ include file="../include/nav.jsp" %>
 			</div>
 		</nav>
 		
-		<section id = "container">
+		<section id="container">
 			<aside>
-				<%@ include file = "../include/aside.jsp" %>
+				<%@ include file="../include/aside.jsp" %>
 			</aside>
 			<div id="container_box">
 				<table>
@@ -40,19 +40,19 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${list}" var="list">
+						<c:forEach items="${list}" var="item">
 							<tr>
-								<td><img src="${list.gdsThumbImg}"></td>
+								<td><img src="${item.gdsThumbImg}" class="thumb-img"></td>
 								<td>
-								<a href="/admin/goods/view?n=${list.gdsNum}">${list.gdsName}</a>
+								<a href="/admin/goods/view?n=${item.gdsNum}">${item.gdsName}</a>
 								</td>
-								<td>${list.cateCode}</td>
+								<td>${item.cateName}</td>
 								<td>
-								<fmt:formatNumber value="${list.gdsPrice}" pattern="###,###,###"/>
+								<fmt:formatNumber value="${item.gdsPrice}" pattern="###,###,###"/>
 								</td>
-								<td>${list.gdsStock}</td>
+								<td>${item.gdsStock}</td>
 								<td>
-								<fmt:formatDate value="${list.gdsDate}" pattern="yyyy.MM.dd"/>
+								<fmt:formatDate value="${item.gdsDate}" pattern="yyyy.MM.dd"/>
 								</td>
 							</tr>
 						</c:forEach>
@@ -61,12 +61,28 @@
 			</div>
 		</section>
 		
-		
-		<footer id = "footer">
-			<div id = "footer_box">
+		<footer id="footer">
+			<div id="footer_box">
 				<%@ include file="../include/footer.jsp" %>
 			</div>
 		</footer>
 	</div>
+	
+	<script>
+    $(document).ready(function() {
+        $('.thumb-img').each(function() {
+            var src = $(this).attr('src').replace(/\\/g, '/');
+            console.log('Image source:', src);
+
+            $(this).attr('src', src);
+
+            $(this).on('load', function() {
+                console.log('Loaded image source:', $(this).attr('src'));
+            }).on('error', function() {
+                console.error('Image failed to load:', $(this).attr('src'));
+            });
+        });
+    });
+    </script>
 </body>
 </html>

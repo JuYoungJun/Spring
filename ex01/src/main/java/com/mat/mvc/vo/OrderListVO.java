@@ -21,6 +21,16 @@ public class OrderListVO {
 	private int gdsPrice;
 	private String gdsThumbImg;
 
+	private String delivery;
+
+	public String getDelivery() {
+		return delivery;
+	}
+
+	public void setDelivery(String delivery) {
+		this.delivery = delivery;
+	}
+
 	public int getOrderDetailsNum() {
 		return orderDetailsNum;
 	}

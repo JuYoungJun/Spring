@@ -48,4 +48,18 @@ public class AdminDAOImpl implements AdminDAO {
         sql.delete(namespace + ".deleteGoods", gdsNum);
     }
 
+	@Override
+	public List<OrderVO> orderList() throws Exception {
+		return sql.selectList(namespace + ".orderList");
+	}
+
+	@Override
+	public List<OrderListVO> orderView(OrderVO order) throws Exception {
+		return sql.selectList(namespace + ".orderView", order);
+	}
+
+	@Override
+	public void delivery(OrderVO order) throws Exception {
+		sql.update(namespace + ".delivery", order);
+	}
 }

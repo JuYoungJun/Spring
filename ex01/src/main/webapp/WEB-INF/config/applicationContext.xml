@@ -1,65 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
-	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
-	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
-		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
-		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+           http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
-	<!-- model에 대한 정보 -->
-	<!-- 패키지명을 넣어준다. -->
-	<context:component-scan base-package="com.mat.mvc.vo"/> 
-	<context:component-scan base-package="com.mat.mvc.dao"/> 
-	<context:component-scan base-package="com.mat.mvc.service"/> 
-	<context:component-scan base-package="com.mat.mvc.service.impl"/> 
-	<context:component-scan base-package="com.mat.mvc.web"/>
-	<context:component-scan base-package="com.mat.mvc.utill"/>
-	
-	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName"
-			value="com.mysql.cj.jdbc.Driver"></property>
-		<property name="url"
-			value="jdbc:mysql://localhost:3306/kjtest3?characterEncoding=UTF-8&amp;useSSL=false&amp;serverTimezone=UTC&amp;allowPublicKeyRetrieval=true">
-		</property>
-		<property name="username" value="root"></property>
-		<property name="password" value="1234"></property>
-	</bean>
+    <!-- 컴포넌트 스캔 -->
+    <context:component-scan base-package="com.mat.mvc"/>
 
-	<!-- mybatis SqlSessionFactoryBean -->
-	<bean id="sqlSessionFactory"
-		class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="configLocation" value="classpath:/mybatis-config.xml"/>
-        <property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml" />
-		<property name="dataSource" ref="dataSource">	
-		</property>
-	</bean>
-	
-	<bean id="sqlSession"
-      class="org.mybatis.spring.SqlSessionTemplate">
-      <constructor-arg index="0" ref="sqlSessionFactory" />
-   </bean>
-   
-    <!-- 업로드 패스 설정 -->
-	<bean class="java.lang.String" id="uploadPath">
-		<constructor-arg value="C:\spring\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ex01\resources"/>
-	</bean>
-   
-   <!-- 정적 리소스 매핑 -->
-   <mvc:resources mapping="/resources/**" location="/resources/" />
-   <mvc:resources mapping="/imgUpload/**" location="/resources/imgUpload/" />
-   
-	<bean
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
-		id="multipartResolver">
-		<property name="maxUploadSize" value="10485760" />
-	</bean>
-	
+    <!-- 데이터 소스 설정 -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/kjtest3?characterEncoding=UTF-8&amp;useSSL=false&amp;serverTimezone=UTC"/>
+        <property name="username" value="root"/>
+        <property name="password" value="1234"/>
+    </bean>
+
+    <!-- MyBatis SqlSessionFactory 설정 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="configLocation" value="classpath:/mybatis-config.xml"/>
+        <property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml"/>
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- MyBatis SqlSessionTemplate 설정 -->
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory"/>
+    </bean>
+
+    <!-- 업로드 경로 설정 -->
+    <bean id="uploadPath" class="java.lang.String">
+        <constructor-arg value="C:/spring/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ex01/resources"/>
+    </bean>
+
+    <!-- 정적 리소스 매핑 설정 -->
+    <!-- <mvc:resources mapping="/imgUpload/**" location="/resources/imgUpload/"/> -->
+    <mvc:resources mapping="/imgUpload/**" location="file:C:/spring/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ex01/resources"/>
+
+    <!-- 파일 업로드 설정 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="10485760"/> <!-- 10 MB -->
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
+
 </beans>

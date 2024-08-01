@@ -23,4 +23,10 @@ public interface AdminService {
     
     // 상품 삭제
     public void deleteGoods(int gdsNum) throws Exception;
+    
+	public List<OrderVO> orderList() throws Exception;
+	
+	public List<OrderListVO> orderView(OrderVO order) throws Exception;
+	
+	public void delivery(OrderVO order) throws Exception;
 }
